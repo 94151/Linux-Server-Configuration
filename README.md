@@ -308,18 +308,18 @@ needs to be created in the directory `/etc/apache2/sites-available/`, in this ca
         WSGIApplicationGroup %{GLOBAL}
 
         # Define the location of the app's WSGI file
-        WSGIScriptAlias / /srv/fullstack-nanodegree-vm/vagrant/catalog/catalog.wsgi
+        WSGIScriptAlias / /srv/vagrant/catalog/catalog.wsgi
 
         # Allow Apache to serve the WSGI app from the catalog app directory
-        <Directory /srv/fullstack-nanodegree-vm/vagrant/catalog/>
+        <Directory ~/vagrant/catalog/>
                 Require all granted
         </Directory>
 
         # Setup the static directory (contains CSS, Javascript, etc.)
-        Alias /static /srv/fullstack-nanodegree-vm/vagrant/catalog/catalog/static
+        Alias /static ~/vagrant/catalog/catalog/static
 
         # Allow Apache to serve the files from the static directory
-        <Directory  /srv/fullstack-nanodegree-vm/vagrant/catalog/catalog/static/>
+        <Directory ~/vagrant/catalog/catalog/static/>
                 Require all granted
         </Directory>
 
@@ -348,10 +348,7 @@ To make these Apache2 configuration changes live, reload Apache:
 
 `sudo service apache reload`
 
-The catalog app should now be available at `http://52.11.206.40` and
-`http://ec2-52-11-206-40.us-west-2.compute.amazonaws.com`
+The catalog app should now be available at `http://13.126.50.96` 
 
-[This][6] was a useful guide to setting up a Flask app on Apache, though the `Directory`
-permissions in the virtual host file were out of date (now it's `Require all granted`
-to allow all clients to access the server).
+
 
