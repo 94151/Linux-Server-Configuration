@@ -34,17 +34,17 @@ These are the software/libraries that I have installed:
 * requests
 * httplib2
 
-**Create a new user named `grader`**
+##Create a new user named `grader`
 
-	 adduser grader
+	 sudo adduser grader
 
-2. **Give the `grader` user permission to sudo**
+##Give the `grader` user permission to sudo**
 
 		 echo "grader ALL=(ALL) ALL" > /etc/sudoers.d/grader
 
 	Without "NOPASSWD" in the config, the user is prompted for password whenever sudo is used.
 
-3. **Set up key-based authentication for `grader`**
+##Set up key-based authentication for `grader`**
 
 		#did this on my local vagrant machine
 		 ssh-keygen
@@ -56,22 +56,22 @@ These are the software/libraries that I have installed:
 		 sudo -i -u grader
 		 mkdir .ssh
 		 touch .ssh/authorized_keys
-  ```nano .ssh/authorized_keys 
+                 nano .ssh/authorized_keys 
 		(copied contents of .pub file into this file)
 		 chmod 700 .ssh
 		 chmod 644 .ssh/authorized_keys```
 
-4. **Disable remote SSH login as `root`**
+##Disable remote SSH login as `root`
 
 		#set this in /etc/ssh/sshd_config
 		PermitRootLogin no
 
-5. **Disable password-based authentication for SSH**
+##Disable password-based authentication for SSH
 
 		#set this in /etc/ssh/sshd_config
 		PasswordAuthentication no
 
-6. **Change the SSH port from 22 to 2200**
+##Change the SSH port from 22 to 2200
 
 		#set this in /etc/ssh/sshd_config
 		Port 2200
