@@ -34,17 +34,17 @@ These are the software/libraries that I have installed:
 * requests
 * httplib2
 
-##Create a new user named `grader`
+## Create a new user named `grader`
 
 	 sudo adduser grader
 
-##Give the `grader` user permission to sudo**
+## Give the `grader` user permission to sudo**
 
 		 echo "grader ALL=(ALL) ALL" > /etc/sudoers.d/grader
 
 	Without "NOPASSWD" in the config, the user is prompted for password whenever sudo is used.
 
-##Set up key-based authentication for `grader`**
+## Set up key-based authentication for `grader`**
 
 		#did this on my local vagrant machine
 		 ssh-keygen
@@ -61,17 +61,17 @@ These are the software/libraries that I have installed:
 		 chmod 700 .ssh
 		 chmod 644 .ssh/authorized_keys```
 
-##Disable remote SSH login as `root`
+## Disable remote SSH login as `root`
 
 		#set this in /etc/ssh/sshd_config
 		PermitRootLogin no
 
-##Disable password-based authentication for SSH
+## Disable password-based authentication for SSH
 
 		#set this in /etc/ssh/sshd_config
 		PasswordAuthentication no
 
-##Change the SSH port from 22 to 2200
+## Change the SSH port from 22 to 2200
 
 		#set this in /etc/ssh/sshd_config
 		Port 2200
@@ -281,69 +281,6 @@ In this instance that would be:
 These addresses also need to be entered into the Google Developers Console -> API Manager
 -> Credentials, in the web client under "Authorized JavaScript origins".
 
-## Configure Apache2 to serve the app
-To serve the catalog app using the Apache web server, a virtual host configuration file
-needs to be created in the directory `/etc/apache2/sites-available/`, in this case called
-`catalog-app.conf`. Here are its contents:
-
-```
-<VirtualHost *:80>
-        # The ServerName directive sets the request scheme, hostname and port that
-        # the server uses to identify itself. This is used when creating
-        # redirection URLs. In the context of virtual hosts, the ServerName
-        # specifies what hostname must appear in the request's Host: header to
-        # match this virtual host. For the default virtual host (this file) this
-        # value is not decisive as it is used as a last resort host regardless.
-        # However, you must set it for any further virtual host explicitly.
-        #ServerName www.example.com
-
-        ServerAdmin webmaster@localhost
-
-        # Define WSGI parameters. The daemon process runs as the www-data user.
-        WSGIDaemonProcess catalog user=www-data group=www-data threads=5
-        WSGIProcessGroup catalog
-        WSGIApplicationGroup %{GLOBAL}
-
-        # Define the location of the app's WSGI file
-        WSGIScriptAlias / /srv/vagrant/catalog/catalog.wsgi
-
-        # Allow Apache to serve the WSGI app from the catalog app directory
-        <Directory ~/vagrant/catalog/>
-                Require all granted
-        </Directory>
-
-        # Setup the static directory (contains CSS, Javascript, etc.)
-        Alias /static ~/vagrant/catalog/catalog/static
-
-        # Allow Apache to serve the files from the static directory
-        <Directory ~/vagrant/catalog/catalog/static/>
-                Require all granted
-        </Directory>
-
-        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
-        # error, crit, alert, emerg.
-        # It is also possible to configure the loglevel for particular
-        # modules, e.g.
-        #LogLevel info ssl:warn
-
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        LogLevel warn
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-```
-Documentation for the WSGI parameters can be found [here][5].
-
-Disable the default virtual host with:
-
-`sudo a2dissite 000-default.conf`
-
-Then enable the catalog app virtual host:
-
-`sudo a2ensite catalog-app.conf`
-
-To make these Apache2 configuration changes live, reload Apache:
-
-`sudo service apache reload`
 
 The catalog app should now be available at `http://13.126.50.96` 
 
