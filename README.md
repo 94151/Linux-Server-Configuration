@@ -85,9 +85,9 @@ Will now need to use the following command to login to the server:
 
 ## Update all currently installed packages
 
-`apt-get update` - to update the package indexes
+`sudo apt-get update` - to update the package indexes
 
-`apt-get upgrade` - to actually upgrade the installed packages
+`sudo apt-get upgrade` - to actually upgrade the installed packages
 
 ## Set-up SSH keys for user grader
 As root user do:
