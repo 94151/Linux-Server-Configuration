@@ -306,7 +306,7 @@ something random and the PostgreSQL for the `muskan` user is set. In this case, 
 Fill in the `client_id` and `client_secret` fields in the file `client_secrets.json`.
 Also change the `javascript_origins` field to the IP address and AWS assigned URL of the host.
 In this instance that would be:
-`"javascript_origins":["http://52.11.206.40"]`
+`"javascript_origins":["http://13.126.50.96"]`
 
 These addresses also need to be entered into the Google Developers Console -> API Manager
 -> Credentials, in the web client under "Authorized JavaScript origins".
