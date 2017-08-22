@@ -101,7 +101,7 @@ chmod 644 /home/grader/.ssh/authorized_keys
 ```
 
 Can now login as the `grader` user using the command:
-`ssh -i ~/.ssh/udacity_key.rsa grader@52.11.206.40`
+`ssh -i LightsailDefaultPrivateKey-ap-south-1.pem ubuntu@13.126.50.96 -p 2200`
 
 
 ## Change timezone to UTC
